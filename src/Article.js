@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import CommentList from './CommentList'
 
 export default class Article extends Component {
-
     constructor() {
         super();
         this.state = {
@@ -17,12 +16,16 @@ export default class Article extends Component {
                 <h2 onClick={this.toggleOpen}>
                     {article.title}
                 </h2>
-                {this.state.isOpen && <div>
-                    <div>{this.props.article.text}</div>
-                    <CommentList comments={article.comments} />
-                </div>}
+                {this.getBody()}
             </div>
         )
+    }
+
+    getBody() {
+        return this.state.isOpen && <div>
+            <div>{this.props.article.text}</div>
+            <CommentList comments={this.props.article.comments} />
+        </div>
     }
 
     toggleOpen = () => {
