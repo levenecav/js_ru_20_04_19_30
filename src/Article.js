@@ -1,53 +1,33 @@
 import React, {Component} from 'react'
+import CommentList from './CommentList'
 
 export default class Article extends Component {
-/*
+
     constructor() {
-        super()
+        super();
         this.state = {
             isOpen: false
-        }
-    }
-*/
-    state = {
-        isOpen: false,
-        foo: 'bar'
+        };
     }
 
     render() {
-        const {article} = this.props
+        const {article} = this.props;
         return (
-            <section>
+            <div className="article">
                 <h2 onClick={this.toggleOpen}>
                     {article.title}
                 </h2>
-                {this.getBody()}
-            </section>
+                {this.state.isOpen && <div>
+                    <div>{this.props.article.text}</div>
+                    <CommentList comments={article.comments} />
+                </div>}
+            </div>
         )
     }
 
-    getBody() {
-        return this.state.isOpen && <div>{this.props.article.text}</div>
-    }
-
-    toggleOpen = ev => {
+    toggleOpen = () => {
         this.setState({
             isOpen: !this.state.isOpen
-        })
+        });
     }
 }
-
-/*
-export default function Article(props) {
-    const {article} = props
-    return (
-        <section>
-            <h2>
-                {article.title}
-            </h2>
-            <div>
-                {article.text}
-            </div>
-        </section>
-    )
-}*/
