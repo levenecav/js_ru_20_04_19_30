@@ -18,6 +18,7 @@ export default class CommentList extends Component {
 
         return (
             <div className="comment-list">
+                {/*не пиши много кода внутри JSX, очень быстро становится нечитабельным*/}
                 {elements && <h4 onClick={this.toggleOpen}>
                     {this.state.isOpen ? 'Hide comments' : 'Show comments'}
                 </h4>}
