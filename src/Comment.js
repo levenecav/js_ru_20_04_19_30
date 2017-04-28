@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-export default function Comment({comment}) {
+export default function Comment({comment = {}}) {
 
     return (
         <div className="comment">
