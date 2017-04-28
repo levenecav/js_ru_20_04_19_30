@@ -1,39 +1,39 @@
 import React, {Component} from 'react'
 import Comment from './Comment'
 
-export default class CommentList extends Component {
-    constructor() {
-        super();
-        this.state = {
-            isOpen: false
-        };
+class CommentList extends Component {
+    state = {
+        isOpen: false
     }
 
     render() {
-        const {comments} = this.props;
-        let elements;
-        if (comments) {
-            elements = comments.map(comment => <div key={comment.id}><Comment comment={comment}/></div>);
-        };
+        const linkText = this.state.isOpen ? 'Hide comments' : 'Show comments';
 
         return (
-            <div className="comment-list">
-                {/*не пиши много кода внутри JSX, очень быстро становится нечитабельным*/}
-                {elements && <h4 onClick={this.toggleOpen}>
-                    {this.state.isOpen ? 'Hide comments' : 'Show comments'}
-                </h4>}
-                {this.state.isOpen && <div>
-                    <ul>
-                        {elements}
-                    </ul>
-                </div>}
+            <div>
+                <a href="#" onClick={this.toggleOpen}>{linkText}</a>
+                {this.getBody()}
             </div>
         )
     }
 
-    toggleOpen = () => {
+    getBody() {
+        if (!this.state.isOpen) return null;
+        const {comments} = this.props;
+        if (!comments || !comments.length) return <p>No comments</p>;
+        return (
+            <ul>
+                {comments.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)}
+            </ul>
+        )
+    }
+
+    toggleOpen = ev=> {
+        ev.preventDefault();
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
 }
+
+export default CommentList
