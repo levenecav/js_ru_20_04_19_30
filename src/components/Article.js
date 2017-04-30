@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import CommnetList from './CommentList'
+import {deleteArticle} from '../AC/articles'
 import PropTypes from 'prop-types'
 
 class Article extends Component {
@@ -11,12 +12,14 @@ class Article extends Component {
     render() {
         const {article, toggleOpen} = this.props
         return (
-            <section>
+            <div>
                 <h2 onClick={toggleOpen}>
                     {article.title}
+
                 </h2>
+                <a href="#" onClick={this.handleDelete}>Delete me</a>
                 {this.getBody()}
-            </section>
+            </div>
         )
     }
 
@@ -27,6 +30,12 @@ class Article extends Component {
                 <CommnetList comments={this.props.article.comments}/>
             </div>
         )
+    }
+
+    handleDelete = (ev) => {
+        ev && ev.preventDefault && ev.preventDefault();
+        deleteArticle(this.props.article.id);
+        // console.log('--this.props.article.id--')
     }
 }
 
