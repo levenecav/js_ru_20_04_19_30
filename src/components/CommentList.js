@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
+import PropTypes from 'prop-types'
 
 function CommentList(props) {
     const {isOpen, toggleOpen} = props
@@ -24,5 +25,10 @@ function getBody(props) {
         </ul>
     )
 }
+
+CommentList.propTypes = {
+    isOpen: PropTypes.bool,
+    toggleOpen: PropTypes.func
+};
 
 export default toggleOpen(CommentList)

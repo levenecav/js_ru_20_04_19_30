@@ -2,10 +2,12 @@ import React, {Component} from 'react'
 import Article from './Article'
 import PropTypes from 'prop-types'
 
-export default class ArticleList extends Component {
+class ArticleList extends Component {
+
     state = {
         openArticleId: null
     }
+
     render() {
         const elements = this.props.articles.map(article => <li key={article.id}>
             <Article article={article}
@@ -29,3 +31,5 @@ export default class ArticleList extends Component {
 ArticleList.propTypes = {
     articles: PropTypes.array
 }
+
+export default ArticleList
