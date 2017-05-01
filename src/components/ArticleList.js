@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Article from './Article'
+import Counter from './Counter'
 import toggleArticle from '../decorators/toggleArticle'
 import PropTypes from 'prop-types'
 
@@ -12,9 +13,12 @@ class ArticleList extends Component {
                      toggleOpen={this.props.toggleArticle(article.id)}/>
         </li>)
         return (
-            <ul>
-                {elements}
-            </ul>
+            <div>
+                <Counter />
+                {/*<ul>
+                    {elements}
+                </ul>*/}
+            </div>
         )
     }
 }
