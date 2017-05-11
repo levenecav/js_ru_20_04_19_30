@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Article from './Article'
-import toggleArticle from '../decorators/toggleArticle'
+import toggleItem from '../decorators/toggleItem'
 import PropTypes from 'prop-types'
 
 class ArticleList extends Component {
@@ -8,8 +8,8 @@ class ArticleList extends Component {
     render() {
         const elements = this.props.articles.map(article => <li key={article.id}>
             <Article article={article}
-                     isOpen={article.id == this.props.openArticleId}
-                     toggleOpen={this.props.toggleArticle(article.id)}/>
+                     isOpen={article.id == this.props.openItemId}
+                     toggleOpen={this.props.toggleItem(article.id)} />
         </li>)
         return (
             <ul>
@@ -26,4 +26,4 @@ ArticleList.propTypes = {
     toggleArticle: PropTypes.func
 }
 
-export default toggleArticle(ArticleList);
+export default toggleItem(ArticleList);

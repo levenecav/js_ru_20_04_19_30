@@ -1,25 +1,25 @@
 //HOC === Higher Order Component === decorator
-import React, {Component as BasicComponent} from 'react'
+import React, {Component} from 'react'
 
 //DecoratedComponent я называл чтоб легче понять было. Лучше выбирай более значущее название
-export default (OriginalComponent) => class DecoratedComponent extends BasicComponent {
+export default (OriginalComponent) => class ToggleItemDecorator extends Component {
     state = {
         //Не привязывайся к названиям сущностей, вся суть декораторов в универсальности. Сделай openItemId
-        openArticleId: null
+        openItemId: null
     }
 
     render() {
         return <OriginalComponent {...this.props}
-                                  openArticleId={this.state.openArticleId}
-                                  toggleArticle={this.toggleArticle}/>
+                                  openItemId={this.state.openItemId}
+                                  toggleItem={this.toggleItem}/>
     }
 
-    toggleArticle = id => ev => {
+    toggleItem = id => ev => {
         ev && ev.preventDefault && ev.preventDefault();
-        if (id == this.state.openArticleId) {
-            this.setState({openArticleId: null});
+        if (id == this.state.openItemId) {
+            this.setState({openItemId: null});
         } else {
-            this.setState({openArticleId: id});
+            this.setState({openItemId: id});
         };
     }
 }
