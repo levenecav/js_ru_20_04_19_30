@@ -7,7 +7,7 @@ import accordion from '../decorators/accordion'
 class ArticleList extends Component {
     componentDidMount() {
         const ref = this.refs[this.props.articles[0].id];
-        console.log("~~~findDOMNode~~~", ref, findDOMNode(ref));
+        // console.log("~~~findDOMNode~~~", ref, findDOMNode(ref));
     }
 
     render() {
@@ -27,7 +27,7 @@ class ArticleList extends Component {
     }
 
     getContainerRef = ref => {
-        console.log("~~~ref~~~", ref);
+        // console.log("~~~ref~~~", ref);
         this.container = ref;
     }
 }

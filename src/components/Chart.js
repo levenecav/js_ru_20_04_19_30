@@ -6,6 +6,10 @@ class Chart extends Component {
         articles: PropTypes.array.isRequired
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log('--updating--', this.props, nextProps)
+    }
+
     render() {
         return (
             <div ref={this.getContainerRef}>
@@ -15,7 +19,7 @@ class Chart extends Component {
     }
 
     getContainerRef = ref => {
-        console.log("~~~ref~~~", ref);
+        // console.log("~~~ref~~~", ref);
         this.container = ref;
         if(!ref) {
             return;
