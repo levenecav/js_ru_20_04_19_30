@@ -28,7 +28,8 @@ function getBody(props) {
 
 CommentList.propTypes = {
     isOpen: PropTypes.bool,
-    toggleOpen: PropTypes.func
-};
+    toggleOpen: PropTypes.func,
+    comments: PropTypes.array
+}
 
 export default toggleOpen(CommentList)

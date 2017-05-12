@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import CommnetList from './CommentList'
+import CommentList from './CommentList'
 import PropTypes from 'prop-types'
 
 class Article extends Component {
@@ -24,7 +24,7 @@ class Article extends Component {
         return this.props.isOpen && (
             <div>
                 {this.props.article.text}
-                <CommnetList comments={this.props.article.comments}/>
+                <CommentList comments={this.props.article.comments}/>
             </div>
         )
     }

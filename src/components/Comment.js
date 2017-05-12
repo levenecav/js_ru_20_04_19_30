@@ -10,7 +10,10 @@ function Comment({comment}) {
 }
 
 Comment.propTypes = {
-    comment: PropTypes.object
-};
+    comment: PropTypes.shape({
+        text: PropTypes.string,
+        user: PropTypes.string
+    })
+}
 
 export default Comment
