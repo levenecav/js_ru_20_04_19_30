@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import CommentList from './CommentList'
 import PropTypes from 'prop-types'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import './article.css'
 
 class Article extends Component {
 
@@ -15,7 +17,12 @@ class Article extends Component {
                 <h2 onClick={toggleOpen}>
                     {article.title}
                 </h2>
-                {this.getBody()}
+                <CSSTransitionGroup
+                    transitionName="article"
+                    transitionEnterTimeout={1000}
+                    transitionLeaveTimeout={1300}>
+                    {this.getBody()}
+                </CSSTransitionGroup>
             </section>
         )
     }
