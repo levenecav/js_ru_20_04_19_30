@@ -39,7 +39,7 @@ class Article extends Component {
                 <CSSTransitionGroup
                     transitionName = "article"
                     transitionEnterTimeout = {500}
-                    transitionLeaveTimeout = {30000}
+                    transitionLeaveTimeout = {300}
                 >
                     {this.getBody()}
                 </CSSTransitionGroup>

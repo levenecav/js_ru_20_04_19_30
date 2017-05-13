@@ -1,0 +1,10 @@
+.new-comment-form__input,
+.new-comment-form__textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    outline:none;
+}
+
+.new-comment-form__textarea--error {
+    border: 1px solid red;
+}
