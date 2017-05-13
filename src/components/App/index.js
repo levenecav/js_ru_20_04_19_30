@@ -46,7 +46,6 @@ class App extends Component {
                 <ArticleList articles = {this.props.articles} />
                 <Chart articles = {this.props.articles} key={this.state.counter}/>
 
-                // DAY PICKER
                 <div className="day-picker">
                     {this.getFirstDayScript()}
                     {this.getSecondDayScript()}
