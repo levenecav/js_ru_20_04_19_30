@@ -10,6 +10,7 @@ import 'react-select/dist/react-select.css'
 import 'react-day-picker/lib/style.css'
 import './style.css'
 
+//компонент становится слишком большим, пора разбивать на более мелкие
 class App extends Component {
     static propTypes = {
 
