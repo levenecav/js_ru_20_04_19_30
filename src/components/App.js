@@ -27,10 +27,10 @@ class App extends Component {
             <div>
                 <Counter />
                 <UserForm />
-                <Filters articles = {this.props.articles} />
-                <a href = "#" onClick = {this.updateCounter}>update chart</a>
-                <ArticleList articles = {this.props.articles} />
-                <Chart articles = {this.props.articles} key={this.state.counter}/>
+                <Filters articles={this.props.articles} />
+                <a href="#" onClick={this.updateCounter}>update chart</a>
+                <ArticleList articles={this.props.articles} />
+                <Chart articles={this.props.articles} key={this.state.counter}/>
             </div>
         )
     }

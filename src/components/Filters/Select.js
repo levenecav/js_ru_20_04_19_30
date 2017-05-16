@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
+import {connect} from 'react-redux'
+import {selectArticle} from '../../AC'
+
 import 'react-select/dist/react-select.css'
 
 class SelectFilter extends Component {
@@ -9,7 +12,7 @@ class SelectFilter extends Component {
     };
 
     state = {
-        selection: null
+        /*selection: null*/
     }
 
     render() {
@@ -19,14 +22,20 @@ class SelectFilter extends Component {
         }))
 
         return (
-            <Select options = {options} value = {this.state.selection}
-                    onChange = {this.handleSelectionChange}
-                    multi = {true}
-            />
+            <Select options={options}
+                    value={this.props.selection}
+                    onChange={this.handleSelectionChange}
+                    multi={true} />
         )
     }
 
-    handleSelectionChange = selection => this.setState({ selection })
+    handleSelectionChange = selection => {
+        this.props.selectArticle(selection);
+        // this.setState({ selection });
+    }
 }
 
-export default SelectFilter
+export default connect((state) => ({
+   articles: state.articles,
+   selection: state.select
+}), { selectArticle })(SelectFilter)

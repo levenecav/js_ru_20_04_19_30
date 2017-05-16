@@ -11,7 +11,7 @@ class Filters extends Component {
     render() {
         return (
             <div>
-                <SelectFilter articles = {this.props.articles} />
+                <SelectFilter articles={this.props.articles} />
                 <DateRange />
             </div>
         )
