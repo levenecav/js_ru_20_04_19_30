@@ -25,10 +25,10 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Counter />
-                <UserForm />
+                {/*<Counter />*/}
+                {/*<UserForm />*/}
                 <Filters articles={this.props.articles} />
-                <a href="#" onClick={this.updateCounter}>update chart</a>
+                {/*<a href="#" onClick={this.updateCounter}>update chart</a>*/}
                 <ArticleList articles={this.props.articles} />
                 <Chart articles={this.props.articles} key={this.state.counter}/>
             </div>
