@@ -8,37 +8,36 @@ import {connect} from 'react-redux'
 class ArticleList extends Component {
     componentDidMount() {
         const ref = this.refs[this.props.articles[0].id]
-        // console.log('---', ref, findDOMNode(ref))
     }
 
-
-    render() {
-        const {articles, toggleOpenItem, isItemOpened, selection, dateRange} = this.props;
-        const {from, to} = dateRange;
-        if(from) {console.log('--from.toISOString()--', from.toISOString())};
-        const {date} = articles;
-
-        
-
-        // console.log('--from, to--', from, to);
-        // console.log('--articles--', articles);
-
-        const filteredArticles = articles.filter(article => {
+    filterBySelection = (list) => {
+        const {selection} = this.props;
+        return list.filter(listItem => {
             let approval;
             if(!selection.length) {
-
-                console.log('--article.date--', article.date);
-
-
-
                 return true;
             } else {
-                selection.forEach(item => {
-                    if(item.value === article.id) approval = true;
+                selection.forEach(selectionItem => {
+                    if(selectionItem.value === listItem.id) approval = true;
                 });
             };
             return approval;
         });
+    }
+
+    filterByDateRange = (list) => {
+        const {dateRange} = this.props;
+        return list.filter(listItem => {
+            let {from, to} = dateRange;
+            if(from != null) from = from.toISOString();
+            if(to != null) to = to.toISOString();
+            if((listItem.date > from || from === null) && (listItem.date < to || to === null)) return true;
+        });
+    }
+
+    render() {
+        const {articles, toggleOpenItem, isItemOpened, selection, dateRange} = this.props;
+        const filteredArticles = this.filterByDateRange(this.filterBySelection(articles));
 
         const elements = filteredArticles.map(article => <li key={article.id}>
             <Article article = {article}
@@ -62,11 +61,22 @@ ArticleList.propTypes = {
     articles: PropTypes.array,
     //from accordion decorator
     toggleOpenItem: PropTypes.func.isRequired,
-    isItemOpened: PropTypes.func.isRequired
+    isItemOpened: PropTypes.func.isRequired,
+    selection: PropTypes.array.isRequired,
+    dateRange: PropTypes.shape({
+        from: React.PropTypes.oneOfType([
+            React.PropTypes.any,
+            React.PropTypes.string
+        ]),
+        to: React.PropTypes.oneOfType([
+            React.PropTypes.any,
+            React.PropTypes.string
+        ])
+    })
 }
 
 export default connect((state) => ({
    articles: state.articles,
-   selection: state.select,
+   selection: state.selection,
    dateRange: state.dateRange
 }))(accordion(ArticleList))

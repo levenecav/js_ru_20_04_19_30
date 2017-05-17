@@ -11,7 +11,7 @@ class Chart extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('---', 'updating chart')
+        // console.log('---', 'updating chart')
         //manage chart state manually
     }
 

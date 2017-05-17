@@ -27,7 +27,6 @@ export function selectArticle(selection) {
 }
 
 export function handleDayClick(dateRange) {
-    // console.log("~~~selection~~~", selection);
     return {
         type: HANDLE_DAY_CLICK,
         payload : { dateRange }

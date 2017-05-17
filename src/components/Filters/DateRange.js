@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import DayPicker, { DateUtils } from 'react-day-picker'
 import {connect} from 'react-redux'
 import {handleDayClick} from '../../AC'
@@ -6,6 +7,19 @@ import {handleDayClick} from '../../AC'
 import 'react-day-picker/lib/style.css';
 
 class DateRange extends Component {
+    static propTypes = {
+        articles: PropTypes.array,
+        dateRange: PropTypes.shape({
+            from: React.PropTypes.oneOfType([
+                React.PropTypes.any,
+                React.PropTypes.string
+            ]),
+            to: React.PropTypes.oneOfType([
+                React.PropTypes.any,
+                React.PropTypes.string
+            ])
+        })
+    };
 
     state = {
         from: null,
@@ -13,17 +27,14 @@ class DateRange extends Component {
     }
 
     handleDayClick = (day) => {
-        // console.log("~~~day~~~", day);
         const {dateRange} = this.props;
         this.props.handleDayClick(DateUtils.addDayToRange(day, this.props.dateRange))
-        // this.setState(DateUtils.addDayToRange(day, this.state));
     }
 
     render() {
         const { from, to } = this.props.dateRange;
         const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
 
-        // console.log("~~~from, to~~~", from, to);
         return (
             <div className="date-range">
                 <DayPicker

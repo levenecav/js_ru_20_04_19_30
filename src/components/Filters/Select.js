@@ -8,12 +8,11 @@ import 'react-select/dist/react-select.css'
 
 class SelectFilter extends Component {
     static propTypes = {
-        articles: PropTypes.array
+        articles: PropTypes.array,
+        selection: PropTypes.array.isRequired
     };
 
-    state = {
-        /*selection: null*/
-    }
+    state = {}
 
     render() {
         const options = this.props.articles.map(article => ({
@@ -31,11 +30,10 @@ class SelectFilter extends Component {
 
     handleSelectionChange = selection => {
         this.props.selectArticle(selection);
-        // this.setState({ selection });
     }
 }
 
 export default connect((state) => ({
    articles: state.articles,
-   selection: state.select
+   selection: state.selection
 }), { selectArticle })(SelectFilter)
