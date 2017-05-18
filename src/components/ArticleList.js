@@ -10,6 +10,7 @@ class ArticleList extends Component {
         const ref = this.refs[this.props.articles[0].id]
     }
 
+    //ок, но еще лучше делать фильтрацию в коннекте
     filterBySelection = (list) => {
         const {selection} = this.props;
         return list.filter(listItem => {
@@ -63,6 +64,7 @@ ArticleList.propTypes = {
     toggleOpenItem: PropTypes.func.isRequired,
     isItemOpened: PropTypes.func.isRequired,
     selection: PropTypes.array.isRequired,
+    //просто React.PropTypes.string
     dateRange: PropTypes.shape({
         from: React.PropTypes.oneOfType([
             React.PropTypes.any,
