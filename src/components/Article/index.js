@@ -5,13 +5,16 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import './style.css'
 import {connect} from 'react-redux'
 import {deleteArticle} from '../../AC/index'
+import {articleSelectorFactory} from '../../selectors'
 
 class Article extends Component {
     static propTypes = {
         article: PropTypes.shape({
-            title: PropTypes.string.isRequired,
+            comments: PropTypes.array.isRequired,
+            date: PropTypes.string,
+            id: PropTypes.string,
             text: PropTypes.string,
-            comments: PropTypes.array
+            title: PropTypes.string
         }),
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
@@ -28,11 +31,12 @@ class Article extends Component {
     }
 
     componentWillUpdate() {
-        console.log('---', 'updating')
+        // console.log('---', 'updating')
     }
 
     render() {
         const {article, toggleOpen} = this.props
+        // console.log("~~~article~~~", article);
         return (
             <section>
                 <h2 onClick={toggleOpen}>
@@ -66,4 +70,14 @@ class Article extends Component {
     }
 }
 
-export default connect(null, { deleteArticle })(Article)
+function createMapStateToProps() {
+    const articleSelector = articleSelectorFactory()
+
+    return function mapStateToProps(state, ownProps) {
+        return {
+            article: articleSelector(state, ownProps)
+        }
+    }
+}
+
+export default connect(createMapStateToProps, { deleteArticle })(Article)
