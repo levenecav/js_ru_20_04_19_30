@@ -3,7 +3,7 @@ import {createSelector} from 'reselect'
 export const articlesGetter = state => state.articles
 export const filtersGetter = state => state.filters
 export const commentsGetter = state => state.comments
-export const idGetter = (state, props) => props.id
+export const commentIdGetter = (state, props) => props.id
 export const articleIdGetter = (state, props) => props.id
 
 export const filteredArticlesSelector = createSelector(articlesGetter, filtersGetter, (articles, filters) => {
@@ -21,7 +21,7 @@ export const filteredArticlesSelector = createSelector(articlesGetter, filtersGe
     return newArticles;
 })
 
-export const commentSelectorFactory = () => createSelector(commentsGetter, idGetter, (comments, id) => {
+export const commentSelectorFactory = () => createSelector(commentsGetter, commentIdGetter, (comments, id) => {
     // console.log('---', 'recalc comment', id)
     return comments[id]
 })

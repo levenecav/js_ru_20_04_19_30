@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {addComment} from '../../AC/index'
 import './style.css'
 
 class CommentForm extends Component {
@@ -13,6 +15,7 @@ class CommentForm extends Component {
     }
 
     render() {
+        // console.log('--this.getDisabled()--', this.getDisabled())
         return (
             <form onSubmit = {this.handleSubmit}>
                 user: <input value = {this.state.user}
@@ -21,21 +24,31 @@ class CommentForm extends Component {
                 comment: <input value = {this.state.comment}
                                 onChange = {this.handleChange('comment')}
                                 className = {this.getClassName('comment')} />
-                <input type = "submit" value = "submit"/>
+                <input disabled={this.getDisabled()} type = "submit" value = "submit"/>
             </form>
         )
     }
 
     handleSubmit = ev => {
         ev.preventDefault()
-        console.log('---', this.state)
+        console.log('---', this.state);
+
+        
+
+        this.props.addComment(this.props.articleId, this.state.user, this.state.comment);
+
         this.setState({
             user: '',
             comment: ''
-        })
+        });
+
     }
 
     getClassName = type => this.state[type].length && this.state[type].length < 10 ? 'form-input__error' : ''
+    getDisabled = () => {
+        const {user, comment} = this.state;
+        return (user.length && comment.length && user.length > 10 && comment.length > 10) ? false : true
+    }
 
     handleChange = type => ev => {
         const {value} = ev.target
@@ -46,4 +59,4 @@ class CommentForm extends Component {
     }
 }
 
-export default CommentForm
+export default connect(null, { addComment })(CommentForm)

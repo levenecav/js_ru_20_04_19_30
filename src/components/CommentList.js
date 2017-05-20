@@ -18,6 +18,7 @@ function CommentList(props) {
 
 function getBody(props) {
     const {comments = [], isOpen} = props
+    console.log('--comments--', comments)
     if (!isOpen) return null
     if (!comments.length) return <div><p>No comments yet</p><CommentForm/></div>
     return (
@@ -25,7 +26,7 @@ function getBody(props) {
             <ul>
                 {comments.map(id => <li key={id}><Comment id={id}/></li>)}
             </ul>
-            <CommentForm />
+            <CommentForm articleId={props.articleId} />
         </div>
     )
 }
