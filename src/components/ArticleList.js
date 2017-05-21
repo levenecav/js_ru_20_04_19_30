@@ -14,6 +14,7 @@ class ArticleList extends Component {
 
     render() {
         const {articles, toggleOpenItem, isItemOpened} = this.props;
+        // console.log("~~~articles~~~", articles);
         const elements = Object.keys(articles).map(id => <li key={id}>
             <Article id={id}
                      isOpen={isItemOpened(id)}
@@ -42,5 +43,4 @@ ArticleList.propTypes = {
 
 export default connect((state) => ({
     articles: filteredArticlesSelector(state)
-    // articles: state.articles
 }))(accordion(ArticleList))

@@ -12,7 +12,10 @@ function Comment({comment}) {
 }
 
 Comment.propTypes = {
-    id: PropTypes.number,
+    id: React.PropTypes.oneOfType([
+        React.PropTypes.number,
+        React.PropTypes.string
+    ]),
     //from connect
     comment: PropTypes.shape({
         text: PropTypes.string,

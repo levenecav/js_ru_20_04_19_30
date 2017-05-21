@@ -15,7 +15,6 @@ class CommentForm extends Component {
     }
 
     render() {
-        // console.log('--this.getDisabled()--', this.getDisabled())
         return (
             <form onSubmit = {this.handleSubmit}>
                 user: <input value = {this.state.user}
@@ -33,21 +32,18 @@ class CommentForm extends Component {
         ev.preventDefault()
         console.log('---', this.state);
 
-        
-
         this.props.addComment(this.props.articleId, this.state.user, this.state.comment);
 
         this.setState({
             user: '',
             comment: ''
         });
-
     }
 
     getClassName = type => this.state[type].length && this.state[type].length < 10 ? 'form-input__error' : ''
     getDisabled = () => {
         const {user, comment} = this.state;
-        return (user.length && comment.length && user.length > 10 && comment.length > 10) ? false : true
+        return (user.length && comment.length && user.length > 0 && comment.length > 0) ? false : true
     }
 
     handleChange = type => ev => {
