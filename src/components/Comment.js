@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {commentSelectorFactory} from '../selectors'
 
 function Comment({comment}) {
-    console.log("~~~comment~~~", comment);
     return (
         <div>
             <p>{comment.text} <b>by {comment.user}</b></p>

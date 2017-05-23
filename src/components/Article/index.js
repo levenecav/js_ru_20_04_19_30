@@ -20,7 +20,7 @@ class Article extends Component {
     }
 
     componentWillReceiveProps({article, loadArticle, isOpen}) {
-        if (isOpen && !this.props.isOpen) loadArticle(article.id)
+        if ((isOpen && !this.props.isOpen) && !article.loaded) loadArticle(article.id)
     }
 
 /*

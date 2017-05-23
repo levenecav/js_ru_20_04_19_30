@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import { INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ALL_COMMENTS,
-    LOAD_ARTICLE, START, SUCCESS, FAIL } from '../constants'
+    LOAD_ARTICLE, LOAD_COMMENTS, START, SUCCESS, FAIL } from '../constants'
 
 export function increment() {
     const action = {
@@ -68,6 +68,27 @@ export function loadArticle(id) {
                 }))
                 .fail(error => dispatch({
                     type: LOAD_ARTICLE + FAIL,
+                    payload: {error, id}
+                }))
+        }, 1000)
+    }
+}
+
+export function loadComments(id) {
+    return (dispatch) => {
+        dispatch({
+            type: LOAD_COMMENTS + START,
+            payload: { id }
+        })
+
+        setTimeout(() => {
+            $.get(`/api/comment?article=${id}`)
+                .done(response => dispatch({
+                    type: LOAD_COMMENTS + SUCCESS,
+                    payload: {response, id}
+                }))
+                .fail(error => dispatch({
+                    type: LOAD_COMMENTS + FAIL,
                     payload: {error, id}
                 }))
         }, 1000)

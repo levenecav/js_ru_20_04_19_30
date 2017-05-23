@@ -8,7 +8,8 @@ const ArticleModel = Record({
     title: null,
     text: '',
     comments: [],
-    loading: false
+    loading: false,
+    loaded: false
 })
 
 const DefaultReducerState = Record({
@@ -21,7 +22,7 @@ export default (articles = new DefaultReducerState(), action) => {
     const {type, payload, response, randomId} = action
     switch (type) {
         case DELETE_ARTICLE:
-            return articles.deleteId(['entities', payload.id])
+            return articles.deleteIn(['entities', payload.id])
 
         case ADD_COMMENT:
             return articles.updateIn(
@@ -42,7 +43,7 @@ export default (articles = new DefaultReducerState(), action) => {
             return articles.setIn(['entities', payload.id, 'loading'], true)
 
         case LOAD_ARTICLE + SUCCESS:
-            return articles.setIn(['entities', payload.id], new ArticleModel(payload.response))
+            return articles.setIn(['entities', payload.id], new ArticleModel({...payload.response, loaded: true}))
     }
 
     return articles

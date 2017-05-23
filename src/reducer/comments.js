@@ -1,5 +1,5 @@
 // import {normalizedComments as defaultComments} from '../fixtures'
-import {ADD_COMMENT, LOAD_ALL_COMMENTS, START, SUCCESS} from '../constants'
+import {ADD_COMMENT, LOAD_ALL_COMMENTS, LOAD_COMMENTS, START, SUCCESS} from '../constants'
 import {arrayToMap} from '../utils'
 import {Map, OrderedMap, Record} from 'immutable'
 
@@ -32,6 +32,12 @@ export default (comments = new DefaultReducerState(), action) => {
                 .set('entities', arrayToMap(response.records, CommentModel))
                 .set('loading', false)
                 .set('loaded', true)
+
+        case LOAD_COMMENTS + START:
+            return comments.setIn(['entities', payload.id, 'loading'], true)
+
+        case LOAD_COMMENTS + SUCCESS:
+            return comments.setIn(['entities', payload.id], new ArticleModel(payload.response))
     }
 
     return comments
