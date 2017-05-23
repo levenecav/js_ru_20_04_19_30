@@ -1,15 +1,38 @@
-import {normalizedComments as defaultComments} from '../fixtures'
-import {ADD_COMMENT} from '../constants'
+// import {normalizedComments as defaultComments} from '../fixtures'
+import {ADD_COMMENT, LOAD_ALL_COMMENTS, START, SUCCESS} from '../constants'
 import {arrayToMap} from '../utils'
+import {Map, OrderedMap, Record} from 'immutable'
 
-export default (comments = arrayToMap(defaultComments), action) => {
-    const {type, payload, randomId} = action
+const CommentModel = Record({
+    id: null,
+    user: '',
+    text: ''
+})
+
+const DefaultReducerState = Record({
+    entities: new OrderedMap({}),
+    loading: false,
+    loaded: false
+})
+
+export default (comments = new DefaultReducerState(), action) => {
+    const {type, payload, response, randomId} = action
     switch (type) {
         case ADD_COMMENT:
             return comments.set(randomId, {
                 ...payload.comment,
                 id: randomId
             })
+
+        case LOAD_ALL_COMMENTS + START:
+            return comments.set('loading', true)
+
+        case LOAD_ALL_COMMENTS + SUCCESS:
+            console.log("~~~response~~~", response);
+            return comments
+                .set('entities', arrayToMap(response.records, CommentModel))
+                .set('loading', false)
+                .set('loaded', true)
     }
 
     return comments

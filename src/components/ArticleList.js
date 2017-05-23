@@ -5,18 +5,27 @@ import PropTypes from 'prop-types'
 import accordion from '../decorators/accordion'
 import {connect} from 'react-redux'
 import {filteredArticlesSelector} from '../selectors'
-import {loadAllArticles} from '../AC'
+import {loadAllArticles, loadAllComments} from '../AC'
 
 class ArticleList extends Component {
     componentDidMount() {
-        const {isLoaded, isLoading, loadAllArticles} = this.props
-        if (!isLoading && !isLoaded) loadAllArticles()
+        const {
+            isArticlesLoaded,
+            isArticlesLoading,
+            loadAllArticles,
+
+            isCommentsLoaded,
+            isCommentsLoading,
+            loadAllComments
+        } = this.props
+        if (!isArticlesLoaded && !isArticlesLoading) loadAllArticles();
+        if (!isCommentsLoaded && !isCommentsLoading) loadAllComments();
     }
 
 
     render() {
-        const {articles, isLoading, toggleOpenItem, isItemOpened} = this.props
-        if (isLoading) return <Loader />
+        const {articles, isArticlesLoading, isCommentsLoading, toggleOpenItem, isItemOpened} = this.props
+        if (isArticlesLoading || isCommentsLoading) return <Loader />
 
         const elements = articles.map(article => <li key={article.id}>
             <Article article = {article}
@@ -46,6 +55,8 @@ ArticleList.propTypes = {
 
 export default connect((state) => ({
     articles: filteredArticlesSelector(state),
-    isLoaded: state.articles.loaded,
-    isLoading: state.articles.loading
-}), {loadAllArticles})(accordion(ArticleList))
+    isArticlesLoaded: state.articles.loaded,
+    isArticlesLoading: state.articles.loading,
+    isCommentsLoaded: state.comments.loaded,
+    isCommentsLoading: state.articles.loading,
+}), {loadAllArticles, loadAllComments})(accordion(ArticleList))
