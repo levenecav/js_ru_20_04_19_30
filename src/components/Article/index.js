@@ -30,7 +30,7 @@ class Article extends Component {
 */
 
     componentWillUpdate() {
-        console.log('---', 'updating')
+        // console.log('---', 'updating')
     }
 
     render() {

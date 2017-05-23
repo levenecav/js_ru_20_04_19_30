@@ -18,6 +18,7 @@ function CommentList(props) {
 
 function getBody(props) {
     const {article: { id, comments = [] }, isOpen} = props
+    console.log('--comments--', comments)
     if (!isOpen) return null
     if (!comments.length) return <div><p>No comments yet</p><CommentForm articleId = {id}/></div>
     return (

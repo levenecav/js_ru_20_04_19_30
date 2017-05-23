@@ -19,16 +19,15 @@ export default (comments = new DefaultReducerState(), action) => {
     const {type, payload, response, randomId} = action
     switch (type) {
         case ADD_COMMENT:
-            return comments.set(randomId, {
+            return comments.setIn(['entities', randomId], new CommentModel({
                 ...payload.comment,
                 id: randomId
-            })
+            }))
 
         case LOAD_ALL_COMMENTS + START:
             return comments.set('loading', true)
 
         case LOAD_ALL_COMMENTS + SUCCESS:
-            console.log("~~~response~~~", response);
             return comments
                 .set('entities', arrayToMap(response.records, CommentModel))
                 .set('loading', false)

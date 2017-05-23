@@ -46,7 +46,7 @@ export function loadAllArticles() {
 }
 
 export function loadAllComments() {
-    console.log("~~~loadAllComments~~~");
+    // console.log("~~~loadAllComments~~~");
     return {
         type: LOAD_ALL_COMMENTS,
         callAPI: '/api/comment'
