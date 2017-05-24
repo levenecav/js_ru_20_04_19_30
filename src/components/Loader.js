@@ -1,5 +1,5 @@
 import React from 'react'
 
-export default function Loader() {
-    return <h1>Loading...</h1>
+export default function Loader({text}) {
+    return <h5>{'Loading ' + text + ' ...'}</h5>
 }

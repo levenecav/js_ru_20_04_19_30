@@ -74,22 +74,22 @@ export function loadArticle(id) {
     }
 }
 
-export function loadComments(id) {
+export function loadComments(articleId) {
     return (dispatch) => {
         dispatch({
             type: LOAD_COMMENTS + START,
-            payload: { id }
+            payload: { articleId }
         })
 
         setTimeout(() => {
-            $.get(`/api/comment?article=${id}`)
+            $.get(`/api/comment?article=${articleId}`)
                 .done(response => dispatch({
                     type: LOAD_COMMENTS + SUCCESS,
-                    payload: {response, id}
+                    payload: {response, articleId}
                 }))
                 .fail(error => dispatch({
                     type: LOAD_COMMENTS + FAIL,
-                    payload: {error, id}
+                    payload: {error, articleId}
                 }))
         }, 1000)
     }

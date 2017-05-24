@@ -18,11 +18,11 @@ const DefaultReducerState = Record({
 export default (comments = new DefaultReducerState(), action) => {
     const {type, payload, response, randomId} = action
     switch (type) {
-        case ADD_COMMENT:
-            return comments.setIn(['entities', randomId], new CommentModel({
-                ...payload.comment,
-                id: randomId
-            }))
+        // case ADD_COMMENT:
+        //     return comments.setIn(['entities', randomId], new CommentModel({
+        //         ...payload.comment,
+        //         id: randomId
+        //     }))
 
         case LOAD_ALL_COMMENTS + START:
             return comments.set('loading', true)
@@ -33,11 +33,11 @@ export default (comments = new DefaultReducerState(), action) => {
                 .set('loading', false)
                 .set('loaded', true)
 
-        case LOAD_COMMENTS + START:
-            return comments.setIn(['entities', payload.id, 'loading'], true)
+        // case LOAD_COMMENTS + START:
+        //     return comments.setIn(['entities', payload.id, 'loading'], true)
 
-        case LOAD_COMMENTS + SUCCESS:
-            return comments.setIn(['entities', payload.id], new ArticleModel(payload.response))
+        // case LOAD_COMMENTS + SUCCESS:
+        //     return comments.setIn(['entities', payload.id], new ArticleModel(payload.response))
     }
 
     return comments

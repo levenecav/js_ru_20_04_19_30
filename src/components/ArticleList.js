@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import {filteredArticlesSelector} from '../selectors'
 import {loadAllArticles, loadAllComments} from '../AC'
 
-class ArticleList extends Component {
+class ArticleList extends Component { 
     componentDidMount() {
         const {
             isArticlesLoaded,
@@ -19,13 +19,13 @@ class ArticleList extends Component {
             loadAllComments
         } = this.props
         if (!isArticlesLoaded && !isArticlesLoading) loadAllArticles();
-        if (!isCommentsLoaded && !isCommentsLoading) loadAllComments();
+        // if (!isCommentsLoaded && !isCommentsLoading) loadAllComments();
     }
 
 
     render() {
         const {articles, isArticlesLoading, isCommentsLoading, toggleOpenItem, isItemOpened} = this.props
-        if (isArticlesLoading || isCommentsLoading) return <Loader />
+        if (isArticlesLoading) return <Loader text="articles list" />
 
         const elements = articles.map(article => <li key={article.id}>
             <Article article = {article}

@@ -61,7 +61,7 @@ class Article extends Component {
     getBody() {
         const {isOpen, article} = this.props
         if (!isOpen) return null
-        if (article.loading) return <Loader />
+        if (article.loading) return <Loader text="article" />
         return (
             <div>
                 {this.props.article.text}

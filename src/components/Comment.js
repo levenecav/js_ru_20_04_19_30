@@ -20,14 +20,16 @@ Comment.propTypes = {
     })
 }
 
-function createMapStateToProps() {
-    const commentSelector = commentSelectorFactory()
+// function createMapStateToProps() {
+//     const commentSelector = commentSelectorFactory()
 
-    return function mapStateToProps(state, ownProps) {
-        return {
-            comment: commentSelector(state, ownProps)
-        }
-    }
-}
+//     return function mapStateToProps(state, ownProps) {
+//         return {
+//             comment: commentSelector(state, ownProps)
+//         }
+//     }
+// }
 
-export default connect(createMapStateToProps)(Comment)
+// export default connect(createMapStateToProps)(Comment)
+
+export default Comment
