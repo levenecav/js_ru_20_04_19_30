@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ArticlesPage from '../route_handlers/ArticlesPage'
-import CommentsPage from '../route_handlers/CommentsPage'
+import CommentsPaginatorPage from '../route_handlers/CommentsPaginatorPage'
 import UserForm from './UserForm'
 import Filters from './Filters/index'
 import Counter from './Counter'
-import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom'
 
 class App extends Component {
     static propTypes = {
@@ -31,7 +31,7 @@ class App extends Component {
                         <Route path = '/filters' component = {Filters} />
                         <Route path = '/articles/new' render = {this.getSomeArticleText} />
                         <Route path = '/articles' component = {ArticlesPage} />
-                        <Route path = '/comments' component = {CommentsPage} />
+                        <Route path='/comments' component={CommentsPaginatorPage}/>
                     </Switch>
                 </div>
             </Router>
