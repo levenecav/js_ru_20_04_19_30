@@ -9,6 +9,7 @@ const CommentModel = Record({
 })
 
 const DefaultReducerState = Record({
+    //я бы хранил комменты в comments.entities, по сути это те же сущности
     entities: new OrderedMap({}),
     total: 0,
     limit: 5,
