@@ -53,6 +53,7 @@ export function loadArticlesComments(articleId) {
     }
 }
 
+//я бы передавал page, а уже тут превращал это в offset и limit
 export function loadComments(limit, offset) {
     return {
         type: LOAD_COMMENTS,
