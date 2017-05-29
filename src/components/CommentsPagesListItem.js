@@ -5,7 +5,7 @@ import {loadComments} from '../AC'
 import Loader from './Loader'
 
 class CommentsPagesListItem extends Component {
-
+    //это же стоит сделать на componentDidMount
     componentWillReceiveProps({number, limit, offset, comments}) {
         if(number !== this.props.number && !comments) {
             this.props.loadComments(limit, limit * (number - 1));
