@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ArticlesPage from '../route_handlers/ArticlesPage'
 import UserForm from './UserForm'
+import Language from './Language'
 import Filters from './Filters/index'
 import Counter from './Counter'
 import ErrorPage from './ErrorPage'
@@ -35,8 +36,10 @@ class App extends Component {
         return (
             <Router history = {history}>
                 <div>
+                    <Language />
                     <UserForm value = {this.state.username} onChange = {this.handleUserChange} />
                     <ul>
+                        {/*<li><NavLink to = '/counter' activeStyle = {{color: 'red'}}>{this.context.lang.Counter}</NavLink></li>*/}
                         <li><NavLink to = '/counter' activeStyle = {{color: 'red'}}>Counter</NavLink></li>
                         <li><NavLink to = '/articles' activeStyle = {{color: 'red'}}>Articles</NavLink></li>
                         <li><NavLink to = '/filters' activeStyle = {{color: 'red'}}>Filters</NavLink></li>
