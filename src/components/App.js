@@ -5,15 +5,18 @@ import UserForm from './UserForm'
 import Language from './Language'
 import Filters from './Filters/index'
 import Counter from './Counter'
+import T from './T'
 import ErrorPage from './ErrorPage'
 import CommentsPage from '../route_handlers/CommentsPage'
 import NotFoundPage from '../route_handlers/NotFoundPage'
 import {Redirect, Route, NavLink, Switch} from 'react-router-dom'
 import {ConnectedRouter as Router} from 'react-router-redux'
 import history from '../history'
+import Locale from '../decorators/locale'
 
 class App extends Component {
     static propTypes = {
+        
     };
 
     state = {
@@ -36,13 +39,12 @@ class App extends Component {
         return (
             <Router history = {history}>
                 <div>
-                    <Language />
+                    <Language setLang={this.props.setLang} lang={this.props.lang} />
                     <UserForm value = {this.state.username} onChange = {this.handleUserChange} />
                     <ul>
-                        {/*<li><NavLink to = '/counter' activeStyle = {{color: 'red'}}>{this.context.lang.Counter}</NavLink></li>*/}
-                        <li><NavLink to = '/counter' activeStyle = {{color: 'red'}}>Counter</NavLink></li>
-                        <li><NavLink to = '/articles' activeStyle = {{color: 'red'}}>Articles</NavLink></li>
-                        <li><NavLink to = '/filters' activeStyle = {{color: 'red'}}>Filters</NavLink></li>
+                        <li><NavLink to = '/counter' activeStyle = {{color: 'red'}}><T>{'COUNTER'}</T></NavLink></li>
+                        <li><NavLink to = '/articles' activeStyle = {{color: 'red'}}><T>{'ARTICLES'}</T></NavLink></li>
+                        <li><NavLink to = '/filters' activeStyle = {{color: 'red'}}><T>{'FILTERS'}</T></NavLink></li>
                     </ul>
                     <Switch>
                         <Route path = '/counter' component = {Counter} exact />
@@ -63,4 +65,4 @@ class App extends Component {
     }
 }
 
-export default App
+export default Locale(App)

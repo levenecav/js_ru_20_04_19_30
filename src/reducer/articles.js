@@ -5,7 +5,7 @@ import {Map, OrderedMap, Record} from 'immutable'
 const ArticleModel = Record({
     id: null,
     date: null,
-    title: null,
+    title: '',
     text: '',
     comments: [],
     loading: false,
@@ -44,7 +44,9 @@ export default (articles = new DefaultReducerState(), action) => {
             return articles.setIn(['entities', payload.id, 'loading'], true)
 
         case LOAD_ARTICLE + SUCCESS:
-            return articles.setIn(['entities', payload.id], new ArticleModel(payload.response))
+            return articles
+                .setIn(['entities', payload.id], new ArticleModel(payload.response))
+                // .setIn(['entities', payload.id, 'loading'], false)
 
         case LOAD_ARTICLE_COMMENTS + START:
             return articles.setIn(['entities', payload.articleId, 'loadingComments'], true)

@@ -3,6 +3,7 @@ import CommnetList from '../CommentList'
 import PropTypes from 'prop-types'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import Loader from '../Loader'
+import T from '../T'
 import './style.css'
 import {connect} from 'react-redux'
 import {deleteArticle, loadArticle} from '../../AC/index'
@@ -11,7 +12,7 @@ class Article extends Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
         article: PropTypes.shape({
-            title: PropTypes.string.isRequired,
+            title: PropTypes.string,
             text: PropTypes.string,
             comments: PropTypes.array
         }),
@@ -25,22 +26,9 @@ class Article extends Component {
     }
 
     componentDidMount() {
-        this.checkAndLoad(this.props)
+        const {article, id, loadArticle} = this.props;
+        if(!article || (article && !article.text)) loadArticle(id);
     }
-
-    componentWillReceiveProps(nextProps) {
-        this.checkAndLoad(nextProps)
-    }
-
-    checkAndLoad({article, id, loadArticle}) {
-        if (!article || (!article.text && !article.loading)) loadArticle(id)
-    }
-
-/*
-    componentWillMount() {
-        console.log('---', 'mounting')
-    }
-*/
 
     componentWillUpdate() {
         console.log('---', 'updating')
@@ -49,7 +37,9 @@ class Article extends Component {
     render() {
         console.log('---', 3)
         const {article, toggleOpen} = this.props
-        if (!article) return null
+        if (article && article.loading) return <Loader />
+        if (!article || (article && !article.text)) return null
+
         return (
             <section>
                 <h2 onClick={toggleOpen}>
@@ -58,7 +48,7 @@ class Article extends Component {
                 <h3>
                     User: {this.context.user}
                 </h3>
-                <a href = "#" onClick = {this.handleDelete}>delete me</a>
+                <a href = "#" onClick = {this.handleDelete}><T>{'DELETE_ME'}</T></a>
                 <CSSTransitionGroup
                     transitionName = "article"
                     transitionEnterTimeout = {500}
@@ -78,8 +68,7 @@ class Article extends Component {
 
     getBody() {
         const {isOpen, article} = this.props
-        if (!isOpen) return null
-        if (article.loading) return <Loader />
+        if (!isOpen) return null;
         return (
             <div>
                 {this.props.article.text}
