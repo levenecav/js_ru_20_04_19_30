@@ -24,7 +24,7 @@ class Article extends Component {
     static contextTypes = {
         user: PropTypes.string
     }
-
+    //не лучшее решение - отказаться от componentWillReceiveProps
     componentDidMount() {
         const {article, id, loadArticle} = this.props;
         if(!article || (article && !article.text)) loadArticle(id);
